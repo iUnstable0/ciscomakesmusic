@@ -1,0 +1,98 @@
+.container {
+	padding: 20px;
+}
+
+.content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	/*background: red;*/
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 40px;
+}
+
+.subtext {
+	text-align: center;
+}
+
+.subscribeBox {
+	background: #cfd981;
+	padding: 20px;
+	border-radius: 6px;
+
+	/*display: flex;*/
+	/*justify-content: center;*/
+	/*align-items: center;*/
+	/*flex-direction: column;*/
+
+	/*gap: 12px;*/
+}
+
+.buttonRow {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+}
+
+.inputBox {
+	/*background: red;*/
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+
+	width: 100%;
+}
+
+.inputLabel {
+	font-size: 16px;
+	text-align: right;
+	width: 100%;
+}
+
+.inputField {
+	background: white;
+	padding: 6px 10px;
+	font-size: 16px;
+	border-radius: 4px;
+
+	border: 3px solid rgba(33, 33, 33, 0.42);
+}
+
+.inputField:focus {
+	border: 3px solid #212121;
+	outline: 2px solid #ffffff;
+}
+
+.submitButton {
+	background: #212121;
+	color: white;
+	border: none;
+
+	margin-top: 6px;
+
+	border-radius: 6px;
+
+	padding: 10px 18px;
+}
+
+.form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.asterisk {
+	color: red;
+	margin-left: 2px;
+}
