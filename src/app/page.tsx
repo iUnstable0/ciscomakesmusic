@@ -31,7 +31,7 @@ export default function Home() {
     <div className={styles.container}>
       <Toaster />
 
-      <div className={styles.content}>
+      <motion.div className={styles.content} layout={"position"}>
         <Image
           src={"/ciscostudios.gif"}
           alt="Cisco Studios"
@@ -59,7 +59,16 @@ export default function Home() {
           key="text-form"
           className={styles.subscribeBox}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0, width: showIceCream ? 400 : 300 }}
+          transition={{
+            duration: 0.2,
+            width: {
+              type: "spring",
+              stiffness: 120,
+              damping: 20,
+            },
+          }}
+          layout
         >
           <AnimatePresence mode="popLayout">
             {subscribed && <p>Thanks for subscribing!</p>}
@@ -104,20 +113,28 @@ export default function Home() {
                   />
                 </div>
 
-                <AnimatePresence>
+                <AnimatePresence mode="popLayout">
                   {showIceCream && (
                     <motion.div
                       key="ice-cream-input"
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto", marginTop: 12 }}
-                      exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                      transition={{ duration: 0.3 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
                       className={styles.inputBox}
-                      style={{ overflow: "hidden" }}
                     >
-                      <p className={styles.inputLabel}>
+                      <motion.p
+                        className={styles.inputLabel}
+                        initial={{
+                          opacity: 0,
+                        }}
+                        animate={{
+                          opacity: 1,
+                        }}
+                        transition={{ delay: 0.2, duration: 0.2 }}
+                      >
                         favorite ice cream flavor
-                      </p>
+                      </motion.p>
                       <input className={styles.inputField} ref={iceCreamRef} />
                     </motion.div>
                   )}
@@ -182,7 +199,7 @@ export default function Home() {
             )}
           </AnimatePresence>
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 }

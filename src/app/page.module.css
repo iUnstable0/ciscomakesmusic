@@ -59,6 +59,13 @@
 	width: 100%;
 }
 
+/*if phone screen*/
+@media (max-width: 600px) {
+	.record {
+		width: 80%;
+	}
+}
+
 .inputLabel {
 	font-size: 16px;
 	text-align: right;
