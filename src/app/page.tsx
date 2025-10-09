@@ -47,9 +47,9 @@ export default function Home() {
         />
 
         <p className={styles.subtext}>
-          hi my name is cisco
+          hi, my name is cisco
           <br />
-          sign up to get notified about new releases
+          sign up to get notified about new releases!
           <br />
           my email is ciscowallacestudios [at] gmail.com
         </p>
