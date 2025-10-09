@@ -2,8 +2,10 @@
 
 import { useState, useRef } from "react";
 
-import Image from "next/image";
+// ✨ 1. Import the useSound hook
+import useSound from "use-sound";
 
+import Image from "next/image";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import * as z from "zod";
@@ -21,6 +23,10 @@ export default function Home() {
   const [subscribed, setSubscribed] = useState(false);
   const [showIceCream, setShowIceCream] = useState(false);
 
+  // ✨ 2. Initialize the hook with the path to your sound file
+  // The path is relative to the `public` directory.
+  const [play] = useSound("/icecream.mp3");
+
   return (
     <div className={styles.container}>
       <Toaster />
@@ -31,7 +37,11 @@ export default function Home() {
           alt="Cisco Studios"
           width={400}
           height={400}
-          onClick={() => setShowIceCream(true)}
+          // ✨ 3. Call the play function in the onClick handler
+          onClick={() => {
+            setShowIceCream(true);
+            play();
+          }}
           style={{ cursor: "pointer" }}
         />
 
@@ -43,6 +53,7 @@ export default function Home() {
           my email is ciscowallacestudios [at] gmail.com
         </p>
 
+        {/* ... The rest of your component remains the same ... */}
         <motion.div
           key="text-form"
           className={styles.subscribeBox}
