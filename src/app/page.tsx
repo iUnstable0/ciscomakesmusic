@@ -59,7 +59,7 @@ export default function Home() {
           key="text-form"
           className={styles.subscribeBox}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0, width: showIceCream ? 400 : 300 }}
+          animate={{ opacity: 1, y: 0, width: showIceCream ? 350 : 300 }}
           transition={{
             duration: 0.2,
             width: {
@@ -133,7 +133,8 @@ export default function Home() {
                         }}
                         transition={{ delay: 0.2, duration: 0.2 }}
                       >
-                        favorite ice cream flavor
+                        favorite ice
+                        <br /> cream flavor
                       </motion.p>
                       <input className={styles.inputField} ref={iceCreamRef} />
                     </motion.div>
