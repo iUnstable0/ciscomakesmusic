@@ -122,6 +122,9 @@ export default function Home() {
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
                       className={styles.inputBox}
+                      style={{
+                        marginTop: "-4px",
+                      }}
                     >
                       <motion.p
                         className={styles.inputLabel}
