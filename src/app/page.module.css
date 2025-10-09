@@ -30,7 +30,7 @@
 
 .subscribeBox {
 	background: #cfd981;
-	padding: 20px;
+	padding: 16px;
 	border-radius: 6px;
 
 	/*display: flex;*/
@@ -62,7 +62,7 @@
 /*if phone screen*/
 @media (max-width: 600px) {
 	.record {
-		width: 80%;
+		width: 75%;
 	}
 }
 
@@ -74,7 +74,7 @@
 
 .inputField {
 	background: white;
-	padding: 6px 10px;
+	padding: 4px 10px;
 	font-size: 16px;
 	border-radius: 4px;
 

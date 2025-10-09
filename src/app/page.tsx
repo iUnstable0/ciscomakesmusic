@@ -35,8 +35,8 @@ export default function Home() {
         <Image
           src={"/ciscostudios.gif"}
           alt="Cisco Studios"
-          width={400}
-          height={400}
+          width={350}
+          height={350}
           // ✨ 3. Call the play function in the onClick handler
           onClick={() => {
             setShowIceCream(true);
