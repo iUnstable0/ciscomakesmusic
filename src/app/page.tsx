@@ -36,9 +36,11 @@ export default function Home() {
         />
 
         <p className={styles.subtext}>
-          Sign up to get notified
+          hi my name is cisco
           <br />
-          about new releases.
+          sign up to get notified about new releases
+          <br />
+          my email is ciscowallacestudios [at] gmail.com
         </p>
 
         <motion.div
