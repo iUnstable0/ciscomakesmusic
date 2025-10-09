@@ -42,6 +42,7 @@ export default function Home() {
             setShowIceCream(true);
             play();
           }}
+          className={styles.record}
           style={{ cursor: "pointer" }}
         />
 
