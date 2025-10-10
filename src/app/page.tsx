@@ -55,7 +55,12 @@ export default function Home() {
                 duration: 0.2,
               },
             }}
-            onClick={() => setVerifying(false)}
+            onClick={() => {
+              setVerifying(false);
+              setSubscribing(false);
+
+              toast.error("Please complete the captcha");
+            }}
           >
             <div className={styles.captchaCtn}>
               <Turnstile
