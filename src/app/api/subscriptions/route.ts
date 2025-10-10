@@ -23,7 +23,7 @@ export async function POST(request: Request) {
   try {
     tokenResult = await validateTurnstileToken({
       token,
-      secretKey: process.env.TURNSTILE_SECRET_KEY!,
+      secretKey: process.env.TURNSTILES_SECRET_KEY!,
     });
   } catch (error) {
     console.error("Validation failed:", error);

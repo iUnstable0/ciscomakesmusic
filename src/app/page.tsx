@@ -252,7 +252,7 @@ export default function Home() {
                     toast.loading("Verifying...", { id: "verify" });
                   }}
                 >
-                  Submit
+                  Submitf
                 </button>
               </motion.div>
             )}
