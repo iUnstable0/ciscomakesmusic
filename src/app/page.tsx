@@ -59,7 +59,7 @@ export default function Home() {
               setVerifying(false);
               setSubscribing(false);
 
-              toast.error("Please complete the captcha");
+              toast.error("Please complete the captcha", { id: "verify" });
             }}
           >
             <div className={styles.captchaCtn}>
@@ -67,6 +67,7 @@ export default function Home() {
                 siteKey={process.env.NEXT_PUBLIC_TURNSTILES_SITE_KEY!}
                 onVerify={async (token: string) => {
                   setVerifying(false);
+                  toast.success("Verified!", { id: "verify" });
 
                   let email;
 
@@ -248,6 +249,7 @@ export default function Home() {
 
                     setVerifying(true);
                     setSubscribing(true);
+                    toast.loading("Verifying...", { id: "verify" });
                   }}
                 >
                   Submit
