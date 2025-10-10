@@ -2,7 +2,8 @@
 
 import { useState, useRef } from "react";
 
-// ✨ 1. Import the useSound hook
+import { Turnstile } from "next-turnstile";
+
 import useSound from "use-sound";
 
 import Image from "next/image";
@@ -19,17 +20,94 @@ export default function Home() {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const iceCreamRef = useRef<HTMLInputElement | null>(null);
 
+  const [verifying, setVerifying] = useState(false);
   const [subscribing, setSubscribing] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
   const [showIceCream, setShowIceCream] = useState(false);
 
-  // ✨ 2. Initialize the hook with the path to your sound file
-  // The path is relative to the `public` directory.
   const [play] = useSound("/icecream.mp3");
 
   return (
     <div className={styles.container}>
       <Toaster />
+
+      <AnimatePresence>
+        {verifying && (
+          <motion.div
+            className={styles.captcha}
+            initial={{
+              transform: "scale(0.95)",
+              opacity: 0,
+            }}
+            animate={{
+              transform: "scale(1)",
+              opacity: 1,
+            }}
+            exit={{
+              transform: "scale(0.95)",
+              opacity: 0,
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 120,
+              damping: 20,
+              opacity: {
+                duration: 0.2,
+              },
+            }}
+            onClick={() => setVerifying(false)}
+          >
+            <div className={styles.captchaCtn}>
+              <Turnstile
+                siteKey={process.env.NEXT_PUBLIC_TURNSTILES_SITE_KEY!}
+                onVerify={async (token: string) => {
+                  setVerifying(false);
+
+                  let email;
+
+                  try {
+                    email = z.email().parse(emailRef.current!.value);
+                  } catch (e) {
+                    toast.error("Invalid email address");
+                    return;
+                  }
+
+                  await toast.promise(
+                    axios
+                      .request({
+                        method: "POST",
+                        url: "/api/subscriptions",
+                        data: {
+                          email: email,
+                          phone: telRef.current!.value,
+                          name: nameRef.current!.value,
+                          iceCream: iceCreamRef.current?.value || "-",
+                          token: token,
+                        },
+                      })
+                      .then((response) => {
+                        setSubscribed(true);
+                        console.log(response.data);
+                      })
+                      .catch((error) => {
+                        console.error(error);
+                      })
+                      .finally(() => {
+                        setSubscribing(false);
+                      }),
+                    {
+                      loading: "Subscribing...",
+                      success: "Subscribed successfully!",
+                      error: "Subscription failed",
+                    },
+                  );
+                }}
+                theme="light"
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <motion.div className={styles.content} layout={"position"}>
         <Image
@@ -156,45 +234,15 @@ export default function Home() {
                       return;
                     }
 
-                    let email;
-
                     try {
-                      email = z.email().parse(emailRef.current.value);
+                      z.email().parse(emailRef.current!.value);
                     } catch (e) {
                       toast.error("Invalid email address");
                       return;
                     }
 
+                    setVerifying(true);
                     setSubscribing(true);
-
-                    await toast.promise(
-                      axios
-                        .request({
-                          method: "POST",
-                          url: "/api/subscriptions",
-                          data: {
-                            email: email,
-                            phone: telRef.current.value,
-                            name: nameRef.current.value,
-                            iceCream: iceCreamRef.current?.value || "-",
-                          },
-                        })
-                        .then((response) => {
-                          setSubscribed(true);
-                          console.log(response.data);
-                        })
-                        .catch((error) => {
-                          console.error(error);
-                        })
-                        .finally(() => {
-                          setSubscribing(false);
-                        }),
-                      {
-                        loading: "Subscribing...",
-                        success: "Subscribed successfully!",
-                        error: "Subscription failed",
-                      },
-                    );
                   }}
                 >
                   Submit

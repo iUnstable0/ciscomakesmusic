@@ -1,10 +1,11 @@
 import axios from "axios";
+import { validateTurnstileToken } from "next-turnstile";
 
 import * as z from "zod";
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { email, phone, name, iceCream } = body;
+  const { email, phone, name, iceCream, token } = body;
 
   let parsedEmail;
 
@@ -15,6 +16,27 @@ export async function POST(request: Request) {
       status: 400,
       headers: { "Content-Type": "application/json" },
     });
+  }
+
+  let tokenResult;
+
+  try {
+    tokenResult = await validateTurnstileToken({
+      token,
+      secretKey: process.env.TURNSTILE_SECRET_KEY!,
+    });
+  } catch (error) {
+    console.error("Validation failed:", error);
+  }
+
+  if (!tokenResult || !tokenResult.success) {
+    return new Response(
+      JSON.stringify({ message: "Captcha validation failed" }),
+      {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
   }
 
   return axios
