@@ -24,11 +24,12 @@ export default function Home() {
   const [subscribing, setSubscribing] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
   const [showIceCream, setShowIceCream] = useState(false);
+  const [isRainbow, setIsRainbow] = useState(false);
 
   const [play] = useSound("/icecream.mp3");
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${isRainbow ? styles.rainbow : ""}`}>
       <Toaster />
 
       <AnimatePresence>
@@ -125,6 +126,10 @@ export default function Home() {
           onClick={() => {
             setShowIceCream(true);
             play();
+            setIsRainbow(true);
+            setTimeout(() => {
+              setIsRainbow(false);
+            }, 1000);
           }}
           className={styles.record}
           style={{ cursor: "pointer" }}

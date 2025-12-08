@@ -119,3 +119,34 @@
 	/*background: red;*/
 	/*width: px;*/
 }
+
+.rainbow {
+  animation: rainbow-bg 2s linear;
+}
+
+@keyframes rainbow-bg {
+  0% {
+    background-color: #ff0000;
+  }
+  14% {
+    background-color: #ff7f00;
+  }
+  28% {
+    background-color: #ffff00;
+  }
+  42% {
+    background-color: #00ff00;
+  }
+  57% {
+    background-color: #0000ff;
+  }
+  71% {
+    background-color: #4b0082;
+  }
+  85% {
+    background-color: #9400d3;
+  }
+  100% {
+    background-color: #ff0000;
+  }
+}
